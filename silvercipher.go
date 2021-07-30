@@ -9,10 +9,6 @@ import "fmt"
 // and return a map of slices with the results
 // operators can either be "desc" or "asc"
 func FindProgression(d []int, operators string) (r map[int][]int, err error) {
-	// default settings
-	if operators == "" {
-		operators = "asc"
-	}
 	r = make(map[int][]int)
 	f := make([]int, 0)
 	i := 0
@@ -42,7 +38,8 @@ func FindProgression(d []int, operators string) (r map[int][]int, err error) {
 		}
 		r[i] = f
 	} else {
-		err = fmt.Errorf("operator type can only be desc or asc")
+		err = fmt.Errorf("invalid input: <%v> ! operator type can only be desc or asc", operators)
+		return r, err
 	}
 	return r, nil
 }
