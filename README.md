@@ -5,7 +5,7 @@ Free Data Analytics Tools Package
 <h1>Installation:</h1>
 	
 go get "github.com/tharouet/silvercipher"
-go install "https://github.com/tharouet/silvercipher"
+go install "github.com/tharouet/silvercipher"
 
 
 <h1>Example:</h1>
