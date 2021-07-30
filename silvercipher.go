@@ -1,8 +1,14 @@
-package silvercipher
-
 // Developed by Tharouet Maamouri
 // Open source
-func FindProgression(d []int, operators string) (r map[int][]int) {
+// Package silver cipher provides simple data analytic tools and pattern recognition
+package silvercipher
+
+import "fmt"
+
+// Find Progression find int number progression either on an ascending or descending basis
+// and return a map of slices with the results
+// operators can either be "desc" or "asc"
+func FindProgression(d []int, operators string) (r map[int][]int, err error) {
 	// default settings
 	if operators == "" {
 		operators = "asc"
@@ -35,6 +41,8 @@ func FindProgression(d []int, operators string) (r map[int][]int) {
 			}
 		}
 		r[i] = f
+	} else {
+		err = fmt.Errorf("operator type can only be desc or asc")
 	}
-	return r
+	return r, nil
 }
