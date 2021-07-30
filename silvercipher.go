@@ -30,8 +30,10 @@ func FindProgression(d []int, operators string) (r map[int][]int, err error) {
 			if d[k-1] > d[k] {
 				f = append(f, d[k])
 			} else {
-				r[i] = f
-				i++
+				if len(f) > 0 {
+					r[i] = f
+					i++
+				}
 				f = []int{}
 				f = append(f, d[k])
 			}
