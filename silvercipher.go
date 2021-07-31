@@ -8,7 +8,7 @@ import "fmt"
 // and return a map of slices with the results
 // operator: can either be "desc" or "asc"
 // minimum: is an int and is the minimum number of floats in a progression
-func FindProgression(d []float64, operator string, minimum int) (r map[int][]float64, err error) {
+func FindProgressions(d []float64, operator string, minimum int) (r map[int][]float64, err error) {
 
 	r = make(map[int][]float64)
 	f := make([]float64, 0)
@@ -58,4 +58,14 @@ func FindProgression(d []float64, operator string, minimum int) (r map[int][]flo
 		return r, err
 	}
 	return r, nil
+}
+
+// Function to find the number of desc and asc progressions
+// and return an int
+// operator: can either be "desc" or "asc"
+// minimum: is an int and is the minimum number of floats in a progression
+func FindNumberOfProgressions(d []float64, operator string, minimum int) (l int, err error) {
+	result, err := FindProgressions(d, operator, minimum)
+	l = len(result)
+	return l, err
 }
