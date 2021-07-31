@@ -1,24 +1,21 @@
 // Developed by Tharouet Maamouri
-// Open source
-// Package silver cipher provides simple data analytic tools and pattern recognition
+// Package silvercipher provides simple data analytic tools and pattern recognition
 package silvercipher
 
 import "fmt"
 
-// Find Progression find int number progression either on an ascending or descending basis
+// Function to find ascending or descending succession of floats in a slice of integers
 // and return a map of slices with the results
-// operator can either be "desc" or "asc"
-// minimum is an int and it the minimum number of numbers progressing int he slice
-func FindProgression(d []int, operator string, minimum int) (r map[int][]int, err error) {
+// operator: can either be "desc" or "asc"
+// minimum: is an int and is the minimum number of floats in a progression
+func FindProgression(d []float64, operator string, minimum int) (r map[int][]float64, err error) {
 
-	// set parameters
-	r = make(map[int][]int)
-	f := make([]int, 0)
+	r = make(map[int][]float64)
+	f := make([]float64, 0)
 	i := 0
 
-	// minium number of ints in a progression
 	if minimum < 1 {
-		err = fmt.Errorf("invalid minimum input: %v ! minimum value must but 1 or over ", minimum)
+		err = fmt.Errorf("invalid minimum input: %v - minimum value must but 1 or over ", minimum)
 		return nil, err
 	}
 
@@ -33,7 +30,7 @@ func FindProgression(d []int, operator string, minimum int) (r map[int][]int, er
 					r[i] = f
 					i++
 				}
-				f = []int{}
+				f = []float64{}
 				f = append(f, d[k])
 			}
 		}
@@ -49,7 +46,7 @@ func FindProgression(d []int, operator string, minimum int) (r map[int][]int, er
 					r[i] = f
 					i++
 				}
-				f = []int{}
+				f = []float64{}
 				f = append(f, d[k])
 			}
 		}
@@ -57,7 +54,7 @@ func FindProgression(d []int, operator string, minimum int) (r map[int][]int, er
 			r[i] = f
 		}
 	} else {
-		err = fmt.Errorf("invalid operator input: %v ! operator type can only be desc or asc", operator)
+		err = fmt.Errorf("invalid operator input: %v - operator type can only be desc or asc", operator)
 		return r, err
 	}
 	return r, nil
