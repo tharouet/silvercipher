@@ -71,8 +71,8 @@ func FindNumberOfProgressions(d []float64, operator string, minimum int) (l int,
 // operator: can either be "desc" or "asc"
 // minimum: is an int and is the minimum number of floats in a progression
 func GetProgressingNumbersOnly(d []float64, operator string) (f []float64, err error) {
-	f = append(f, d[0])
 	z := 0
+	f = append(f, d[0])
 	if operator == "asc" {
 		for k := 1; k < len(d); k++ {
 			if d[z] < d[k] {
@@ -82,7 +82,6 @@ func GetProgressingNumbersOnly(d []float64, operator string) (f []float64, err e
 		}
 	} else if operator == "desc" {
 		for k := 1; k < len(d); k++ {
-			fmt.Println(z)
 			if d[z] > d[k] {
 				f = append(f, d[k])
 				z = k
@@ -93,4 +92,28 @@ func GetProgressingNumbersOnly(d []float64, operator string) (f []float64, err e
 		return nil, err
 	}
 	return f, nil
+}
+
+// Take a slice of floats and return the average, highest and lowest values and error if
+// slice is empty
+func Average(d []float64) (average, highest, lowest float64, err error) {
+	l := len(d)
+	if l == 0 {
+		err = fmt.Errorf("invalid slice input: %v - slice must not be empty", d)
+		return 0, 0, 0, err
+	}
+	var t float64
+	highest = d[0]
+	lowest = d[0]
+	for _, v := range d {
+		t = t + v
+		if highest > v {
+			highest = v
+		}
+		if lowest < v {
+			lowest = v
+		}
+	}
+	average = t / float64(len(d))
+	return average, highest, lowest, nil
 }
