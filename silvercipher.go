@@ -23,32 +23,28 @@ func FindProgressions(d []float64, operator string, minimum int) (r map[int][]fl
 	f = append(f, d[0])
 	if operator == "asc" {
 		for k := 1; k < len(d); k++ {
-			if d[k-1] < d[k] {
-				f = append(f, d[k])
-			} else {
+			if d[k-1] > d[k] {
 				if len(f) > minimum {
 					r[i] = f
 					i++
 				}
 				f = []float64{}
-				f = append(f, d[k])
 			}
+			f = append(f, d[k])
 		}
 		if len(f) > minimum {
 			r[i] = f
 		}
 	} else if operator == "desc" {
 		for k := 1; k < len(d); k++ {
-			if d[k-1] > d[k] {
-				f = append(f, d[k])
-			} else {
+			if d[k-1] < d[k] {
 				if len(f) > minimum {
 					r[i] = f
 					i++
 				}
 				f = []float64{}
-				f = append(f, d[k])
 			}
+			f = append(f, d[k])
 		}
 		if len(f) > minimum {
 			r[i] = f
@@ -68,4 +64,25 @@ func FindNumberOfProgressions(d []float64, operator string, minimum int) (l int,
 	result, err := FindProgressions(d, operator, minimum)
 	l = len(result)
 	return l, err
+}
+
+func GetProgressingNumbersOnly(d []float64, operator string) (f []float64, err error) {
+
+	if operator == "asc" {
+		for k := 1; k < len(d); k++ {
+			if d[k-1] < d[k] {
+				f = append(f, d[k])
+			}
+		}
+	} else if operator == "desc" {
+		for k := 1; k < len(d); k++ {
+			if d[k-1] > d[k] {
+				f = append(f, d[k])
+			}
+		}
+	} else {
+		err = fmt.Errorf("invalid operator input: %v - operator type can only be desc or asc", operator)
+		return nil, err
+	}
+	return f, nil
 }
