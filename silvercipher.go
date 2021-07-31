@@ -66,18 +66,26 @@ func FindNumberOfProgressions(d []float64, operator string, minimum int) (l int,
 	return l, err
 }
 
+// Function to get the ascending or descending numbers only in a slice of floats
+// and return an int
+// operator: can either be "desc" or "asc"
+// minimum: is an int and is the minimum number of floats in a progression
 func GetProgressingNumbersOnly(d []float64, operator string) (f []float64, err error) {
-
+	f = append(f, d[0])
+	z := 0
 	if operator == "asc" {
 		for k := 1; k < len(d); k++ {
-			if d[k-1] < d[k] {
+			if d[z] < d[k] {
 				f = append(f, d[k])
+				z = k
 			}
 		}
 	} else if operator == "desc" {
 		for k := 1; k < len(d); k++ {
-			if d[k-1] > d[k] {
+			fmt.Println(z)
+			if d[z] > d[k] {
 				f = append(f, d[k])
+				z = k
 			}
 		}
 	} else {
