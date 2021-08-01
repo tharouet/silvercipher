@@ -2,7 +2,9 @@
 // Package silvercipher provides simple data analytic tools and pattern recognition
 package silvercipher
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // Function to find ascending or descending succession of floats in a slice of integers
 // and return a map of slices with the results
@@ -116,4 +118,31 @@ func Average(d []float64) (average, highest, lowest float64, err error) {
 	}
 	average = t / float64(len(d))
 	return average, highest, lowest, nil
+}
+
+//Insert slice <new> in the n position of slice <original>
+func AddToSlice(original, new []float64, n int) (r []float64) {
+	a := original[:n]
+	b := original[n:]
+	r = append(r, a...)
+	r = append(r, new...)
+	r = append(r, b...)
+	return
+}
+
+//Remove section from position start to position end from <original> slice
+func RemoveFromSlice(original []float64, start, end int) (r []float64) {
+	a := original[:start]
+	b := original[end:]
+	r = append(r, a...)
+	r = append(r, b...)
+	return r
+}
+
+//Invert slice content
+func InvertSlice(original []float64) (r []float64) {
+	for i := (len(original) - 1); i >= 0; i-- {
+		r = append(r, original[i])
+	}
+	return
 }
